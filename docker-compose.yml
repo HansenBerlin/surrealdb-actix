@@ -1,0 +1,15 @@
+version : '3.7'
+services:
+  backend:
+    image: actix-surreal
+    networks:
+      backend:
+    environment:
+      - RUST_BACKTRACE=1
+    volumes:
+      - ./surreal.db:/surreal.db
+    ports:
+      - "8080:8080"
+
+networks:
+  backend:

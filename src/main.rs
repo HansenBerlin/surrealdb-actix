@@ -12,7 +12,7 @@ mod prelude;
 mod error;
 
 use repository::surrealdb_repo::SurrealDBRepo;
-use api::todo_api::{create_todo, get_todos, get_todo, update_todo, delete_todo};
+use api::file_api::{create_file, get_files, get_file, update_file, delete_file, hello};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -23,13 +23,14 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || { 
         App::new()
             .app_data(db_data.clone())
-            .service(create_todo)
-            .service(get_todos)
-            .service(get_todo)
-            .service(update_todo)
-            .service(delete_todo)
+            .service(create_file)
+            .service(get_files)
+            .service(get_file)
+            .service(update_file)
+            .service(delete_file)
+            .service(hello)
         })
-        .bind(("127.0.0.1", 8080))?
+        .bind(("0.0.0.0", 8080))?
         .run()
         .await
 }
